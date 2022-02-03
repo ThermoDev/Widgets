@@ -4,10 +4,10 @@ import axios from 'axios';
 // https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch=programming
 
 const Search = () => {
-  const [term, setTerm] = useState('');
+  const [term, setTerm] = useState('Programming');
   const [results, setResults] = useState([]);
 
-  console.log(results)
+  console.log(results);
 
   useEffect(() => {
     const search = async () => {
@@ -23,7 +23,7 @@ const Search = () => {
       setResults(data.query.search);
     };
 
-    if (term){
+    if (term) {
       search();
     }
   }, [term]);
@@ -32,6 +32,25 @@ const Search = () => {
   // ..nothing..  : Run at initial render -> Run after every rerender
   // []           : Run at initial render
   // [date]       : Run at initial render -> Run after every rerender if data has changed since last rerender
+
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="right floated content">
+          <a
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+            className="ui button"
+          >
+            Go
+          </a>
+        </div>
+        <div className="content">
+          <div className="header">{result.title}</div>
+          <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+        </div>
+      </div>
+    );
+  });
 
   return (
     <div>
@@ -45,6 +64,7 @@ const Search = () => {
           />
         </div>
       </div>
+      <div className="ui celled list">{renderedResults}</div>
     </div>
   );
 };
