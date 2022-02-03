@@ -23,15 +23,27 @@ const Search = () => {
       setResults(data.query.search);
     };
 
-    if (term) {
+    // Check for initial render
+    if (term && !results.length) {
       search();
+    } else {
+      const timeoutId = setTimeout(() => {
+        if (term) {
+          search();
+        }
+      }, 500);
+
+      // Cleanup function, invoked in the next rerender
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
   }, [term]);
 
   // useEffect second argument
   // ..nothing..  : Run at initial render -> Run after every rerender
   // []           : Run at initial render
-  // [date]       : Run at initial render -> Run after every rerender if data has changed since last rerender
+  // [data]       : Run at initial render -> Run after every rerender if data has changed since last rerender
 
   const renderedResults = results.map((result) => {
     return (
