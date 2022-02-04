@@ -21,19 +21,19 @@ const items = [
 const options = [
   {
     label: 'The color red',
-    key: 'red',
+    value: 'red',
   },
   {
     label: 'The color green',
-    key: 'green',
+    value: 'green',
   },
   {
     label: 'A shade of blue',
-    key: 'blue',
+    value: 'blue',
   },
 ];
 
-export default () => {
+const App = () => {
   const [selected, setSelected] = useState(options[0]);
 
   return (
@@ -48,3 +48,5 @@ export default () => {
     </div>
   );
 };
+
+export default App;
