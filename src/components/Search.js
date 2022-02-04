@@ -33,7 +33,7 @@ const Search = () => {
       setResults(data.query.search);
     };
     search();
-  }, [debouncedTerm])
+  }, [debouncedTerm]);
 
   // useEffect second argument
   // ..nothing..  : Run at initial render -> Run after every rerender
