@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
+import Dropdown from './components/Dropdown';
 
 const items = [
   {
@@ -17,13 +18,27 @@ const items = [
   },
 ];
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        {/* <Accordion items={items} /> */}
-        <Search />
-      </div>
-    );
-  }
-}
+const options = [
+  {
+    label: 'The color red',
+    key: 'red',
+  },
+  {
+    label: 'The color green',
+    key: 'green',
+  },
+  {
+    label: 'A shade of blue',
+    key: 'blue',
+  },
+];
+
+export default () => {
+  return (
+    <div>
+      {/* <Accordion items={items} /> */}
+      {/* <Search /> */}
+      <Dropdown options={options} />
+    </div>
+  );
+};
