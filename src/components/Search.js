@@ -5,9 +5,19 @@ import axios from 'axios';
 
 const Search = () => {
   const [term, setTerm] = useState('Programming');
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
 
-  console.log(results);
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 1000);
+
+    // Cleanup function, invoked in the next rerender
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [term]);
 
   useEffect(() => {
     const search = async () => {
@@ -17,28 +27,13 @@ const Search = () => {
           list: 'search',
           origin: '*',
           format: 'json',
-          srsearch: term,
+          srsearch: debouncedTerm,
         },
       });
       setResults(data.query.search);
     };
-
-    // Check for initial render
-    if (term && !results.length) {
-      search();
-    } else {
-      const timeoutId = setTimeout(() => {
-        if (term) {
-          search();
-        }
-      }, 500);
-
-      // Cleanup function, invoked in the next rerender
-      return () => {
-        clearTimeout(timeoutId);
-      };
-    }
-  }, [term]);
+    search();
+  }, [debouncedTerm])
 
   // useEffect second argument
   // ..nothing..  : Run at initial render -> Run after every rerender
