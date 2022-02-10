@@ -3,8 +3,6 @@ import { useState } from 'react/cjs/react.development';
 import Dropdown from './Dropdown';
 import Convert from './Convert';
 
-// API KEY: AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM
-
 const options = [
   {
     label: 'Afrikaans',
