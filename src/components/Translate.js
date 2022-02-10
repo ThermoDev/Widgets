@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react/cjs/react.development';
 import Dropdown from './Dropdown';
+import Convert from './Convert';
+
+// API KEY: AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM
 
 const options = [
   {
@@ -23,18 +26,21 @@ const Translate = () => {
 
   return (
     <div>
-      <div className='ui form'>
-        <div className='field'>
+      <div className="ui form">
+        <div className="field">
           <label>Enter Text</label>
-        <input value={text} onChange={(e) => setText(e.target.value)} />
+          <input value={text} onChange={(e) => setText(e.target.value)} />
         </div>
       </div>
       <Dropdown
         selected={language}
         onSelectedChange={setLanguage}
         options={options}
-        label="Select a language"
+        label="Select a Language"
       />
+      <hr />
+      <h3 className="ui header">Output</h3>
+      <Convert language={language} text={text} />
     </div>
   );
 };
